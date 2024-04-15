@@ -18,6 +18,8 @@ RESULTS_FILE = 'query_results.txt'
 LAST_PROCESSED_ID_FILE = 'last_processed_id.txt'
 ERROR_LOG_FILE = 'error_log.txt'
 
+DELAY_BETWEEN_REQUESTS_IN_SECONDS = 10
+
 SQL_QUERY = """
         WITH RankedMessages AS (
             SELECT
@@ -89,7 +91,7 @@ def read_from_file_and_send_requests():
             finally:
                 with open(LAST_PROCESSED_ID_FILE, 'w') as f:
                     f.write(row_id)
-            time.sleep(10)
+            time.sleep(DELAY_BETWEEN_REQUESTS_IN_SECONDS)
 
 
 def main():
